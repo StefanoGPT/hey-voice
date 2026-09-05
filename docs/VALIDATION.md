@@ -2,6 +2,8 @@
 
 Checked on 2026-09-05 with macOS 26.1 and Xcode/Swift 6.2.4, on Apple silicon.
 
+Version 0.1.1 adds a full-width, 32-point-high Options control. The chevron, label, and empty row area use one button. Expansion and collapse were verified in the installed companion, with the compact panel and internal scrolling retained. The community packaging also includes the corrected creator credit.
+
 ## Verified
 
 - `swift test`: 18 tests, zero failures. Covers custom keyword matching, whole-word/utterance boundaries, stale transcripts, untimed partial results late in a session, disabled/suspended behavior, unknown audio state, cooldown, Codex microphone handoff policy, and the regression that unrelated microphone/playback activity must not block activation. Handoff regressions cover short and long calls, manual shortcuts, unrelated/unknown audio, and preservation of recovery/suspension delays.

@@ -64,7 +64,7 @@ struct CompanionPopover: View {
                     Link("Created by @StefanoGPT", destination: URL(string: "https://x.com/StefanoGPT")!)
                         .font(.caption)
                 }.padding(.top, 9)
-            }.font(.callout)
+            }.disclosureGroupStyle(FullRowDisclosureStyle()).font(.callout)
             if let error = controller.errorMessage {
                 Text(error).font(.caption).foregroundStyle(.red).textSelection(.enabled)
                     .fixedSize(horizontal: false, vertical: true)
@@ -90,6 +90,32 @@ struct CompanionPopover: View {
         .onChange(of: controller.preferences.keyword) { _, _ in controller.savePreferences() }
         .onChange(of: controller.preferences.locale) { _, _ in controller.savePreferences() }
         .onChange(of: controller.preferences.hotkey) { _, _ in controller.savePreferences() }
+    }
+}
+
+/// The label, chevron, and empty row space share one generous click target.
+private struct FullRowDisclosureStyle: DisclosureGroupStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                configuration.isExpanded.toggle()
+            } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 10, weight: .semibold))
+                        .rotationEffect(.degrees(configuration.isExpanded ? 90 : 0))
+                        .accessibilityHidden(true)
+                    configuration.label
+                    Spacer(minLength: 0)
+                }
+                .frame(maxWidth: .infinity, minHeight: 32, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(configuration.isExpanded ? "Expanded" : "Collapsed")
+            .accessibilityHint("Show or hide additional settings")
+            if configuration.isExpanded { configuration.content }
+        }
     }
 }
 

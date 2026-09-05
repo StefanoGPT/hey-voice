@@ -6,7 +6,7 @@ Created by [@StefanoGPT](https://x.com/StefanoGPT).
 
 ## The simple installation path
 
-[Download the precompiled DMG](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.0/HeyVoice-0.1.0-macOS.dmg). No Terminal or developer tools are required. GitHub's automatic “Source code” ZIP is not an installer.
+[Download the precompiled DMG](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.1/HeyVoice-0.1.1-macOS.dmg). No Terminal or developer tools are required. GitHub's automatic “Source code” ZIP is not an installer.
 
 1. Download **HeyVoice-…-macOS.dmg** from Releases. One download covers both Apple silicon and Intel Macs; speech-model availability can vary by device.
 2. Open the DMG and drag **Hey Voice** onto **Applications**.
