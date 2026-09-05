@@ -2,13 +2,15 @@
 
 <img src="Resources/VoiceOrb.png" width="112" height="112" alt="Hey Voice luminous orb icon">
 
-[![Build and test](https://github.com/StefNx/hey-voice/actions/workflows/ci.yml/badge.svg)](https://github.com/StefNx/hey-voice/actions/workflows/ci.yml)
+[![Build and test](https://github.com/StefanoGPT/hey-voice/actions/workflows/ci.yml/badge.svg)](https://github.com/StefanoGPT/hey-voice/actions/workflows/ci.yml)
 
 **Say “Hey Voice.” Codex Voice opens. You take it from there.**
 
 A tiny, independent macOS menu-bar companion that connects a customizable wake phrase to your desktop app’s voice hotkey. Change **Voice** to **Chat**, **Atlas**, or another word. The prefix stays **Hey**.
 
-**Status: macOS source preview, 0.1.0.** Real spoken activation and re-arming after calls have been confirmed by the tester on one Mac. Includes 18 automated policy tests and local app packaging. A notarized installer is not available yet. See [validation](docs/VALIDATION.md) for exact coverage and remaining release checks. Not affiliated with or endorsed by OpenAI.
+**Created by [@StefanoGPT on X](https://x.com/StefanoGPT).** [Credits](CREDITS.md)
+
+**Status: macOS community preview, 0.1.0.** Available as a precompiled DMG or source code. Real spoken activation and re-arming have been confirmed on one Mac, with 18 automated policy tests. The precompiled app is ad-hoc signed and **not notarized by Apple**; first launch may require your approval in macOS Privacy & Security. See [validation](docs/VALIDATION.md) for coverage. Not affiliated with or endorsed by OpenAI.
 
 **Windows:** planned, not implemented. This Swift/AppKit app runs on macOS only. See the [Windows roadmap](docs/WINDOWS.md).
 
@@ -35,10 +37,23 @@ macOS displays its own microphone privacy indicator while capture is active. Hey
 
 The build script supports Apple silicon and Intel. An Intel build is not evidence of on-device model availability on every Intel Mac.
 
-## Build and open
+## Install the precompiled app
+
+**[Download Hey Voice for macOS (.dmg)](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.0/HeyVoice-0.1.0-macOS.dmg)** · [Release notes and checksums](https://github.com/StefanoGPT/hey-voice/releases/tag/v0.1.0)
+
+1. Open the DMG and drag **Hey Voice** onto **Applications**.
+2. Eject the DMG, then open Hey Voice from Applications.
+3. This community build is not notarized. If macOS cannot verify the developer, and you trust this release, use **System Settings → Privacy & Security → Open Anyway**, then confirm Open. This creates an exception for this app only. [Apple's instructions](https://support.apple.com/en-us/102445).
+4. Click the orb in the menu bar, match your Codex Voice shortcut, and enable detection. Allow Microphone, Speech Recognition, and Accessibility when asked.
+
+**No Terminal, Xcode, Apple Developer account, or API key is needed to use the precompiled app.** It requires macOS 15+ and an available on-device recognition language. Managed Macs may not allow opening unnotarized software. If macOS reports malware or damaged software, stop and report the message; do not disable security protections.
+
+[Simple setup and troubleshooting guide](docs/INSTALL.md). Prefer to build it yourself? Follow the separate developer instructions below. GitHub's automatic “Source code” ZIP contains the project, not a runnable app.
+
+## Build from source (developers)
 
 ```sh
-git clone https://github.com/StefNx/hey-voice.git
+git clone https://github.com/StefanoGPT/hey-voice.git
 cd hey-voice
 swift test
 ./scripts/build-app.sh
@@ -92,20 +107,16 @@ UNIVERSAL=1 ./scripts/build-app.sh
 
 `--self-check` reads recognition availability, audio activity flags, Accessibility trust, and target availability. It does not open a microphone or send a shortcut. It is a diagnostic, not an end-to-end voice test.
 
-Public download packaging requires a **Developer ID Application** certificate and a configured `notarytool` keychain profile. A normal Apple Development certificate is not enough for a notarized public release.
+Two packaging paths are available:
 
-```sh
-VERSION=0.1.0 \
-SIGNING_IDENTITY='Developer ID Application: Your Name (TEAMID)' \
-NOTARY_PROFILE='your-existing-profile' \
-./scripts/package-release.sh
-```
+- **Community preview (current):** `VERSION=0.1.0 scripts/package-preview.sh` builds a universal DMG, app ZIP, and SHA-256 checksums using ad-hoc signing. It never uses a personal certificate or Apple account. The manually triggered **Package community preview** GitHub workflow builds these files without Apple secrets. The first-launch notice must remain visible in release notes and the setup guide.
+- **Optional notarized distribution:** `scripts/package-release.sh` retains a separate Developer ID + notarization path for a future maintainer who chooses it. This is not required for the current OSS release and is not used by the community workflow. See [release documentation](docs/RELEASING.md).
 
-This builds both architectures, signs with the hardened runtime, submits for notarization, staples the ticket, validates Gatekeeper acceptance, and creates a ZIP plus SHA-256 checksum. It does not publish anything automatically. Do not distribute the ad-hoc development build as a notarized release or ask users to disable Gatekeeper.
+Neither script publishes automatically. Downloadable previews should be attached to a GitHub prerelease with their checksums and the exact source commit. Follow the [release checklist](docs/RELEASING.md); never describe an ad-hoc build as Apple-verified or notarized.
 
 Shortcut interception is temporary, foreground-only, and stores only the selected key code/modifiers. No keystroke history is recorded. It is removed on completion, cancellation, focus loss, or timeout.
 
-The GitHub workflow builds and tests source; it does not export unsigned binaries or require signing secrets for pull requests. Complete the [release checklist](docs/RELEASING.md) before attaching public binaries.
+Pull requests run build and policy checks without signing secrets. The separate manual packaging workflow exports community preview artifacts for release review.
 
 ## Contributing
 

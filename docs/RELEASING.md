@@ -9,7 +9,17 @@
 - Review `git diff --check` and all files staged for publication. No local paths, credentials, signing materials, build caches, or private screenshots.
 - Label the first source publication a developer preview until live tests are complete.
 
-## Consumer binary
+## Community precompiled preview (current distribution)
+
+- Run tests, then build with `VERSION=0.1.0 scripts/package-preview.sh`, or use the manual **Package community preview** GitHub workflow on the intended source commit.
+- The script forces ad-hoc signing. No personal certificate, Apple account, notarization profile, or signing secret is needed or used.
+- Verify the DMG mounts, contains Hey Voice and an Applications link, and includes the beginner guide and creator credits. Check that the app signature reports `Signature=adhoc`, no certificate authority, and no TeamIdentifier.
+- Verify both Mach-O architectures, bundle metadata, checksums, and correspondence between the release tag and the workflow source SHA. Do not publish debug logs, local caches, or personal signing material.
+- Publish the DMG, ZIP, and checksum file as a GitHub **prerelease**, explicitly labelled **not notarized by Apple**. Explain the app-specific Open Anyway approval and link to Apple's instructions. Do not ask users to disable Gatekeeper or strip quarantine attributes.
+- State the actual hardware/runtime checks and what remains untested. Initial successful testing on the developer's Mac is not a clean-account downloaded-app test.
+- Keep source-build instructions available separately. The current community preview is not an App Store release.
+
+## Broader runtime validation
 
 - Run at least 30 spoken activations from realistic couch distance; record successes, misses, and latency without storing conversation audio.
 - Verify at least two custom keywords, including a word other than Voice or Chat, with the selected language.
@@ -22,9 +32,14 @@
 - Test launch at login from Applications, persisted pause, and duplicate app launches.
 - Check permission prompts and recognition on a fresh account; developer machine permissions can be inherited or previously granted.
 - Validate arm64 and x86_64 on actual representative hardware before listing them as tested. Verify macOS 15 separately from later versions.
+
+## Optional future notarized distribution
+
+This path is separate from the current community preview. Use it only if the maintainer elects to distribute with a Developer ID identity.
+
 - Set final bundle identity, version/build number, application name, and release notes before signing.
-- Sign with Developer ID Application, notarize, staple, and pass Gatekeeper assessment using `scripts/package-release.sh`.
-- Test the downloaded ZIP on a clean Mac. Publish only the final notarized ZIP and checksum; keep signing/notarization material private.
+- Sign with Developer ID Application, notarize, staple, and pass Gatekeeper assessment using `scripts/package-release.sh` with `VERSION`, `SIGNING_IDENTITY`, and `NOTARY_PROFILE`.
+- Test the downloaded ZIP on a clean Mac. Only label a package notarized after verifying its ticket. Keep signing/notarization material private.
 
 ## Known scope boundaries
 

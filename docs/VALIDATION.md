@@ -24,7 +24,7 @@ After that correction, the tester confirmed two real spoken activations. Diagnos
 
 The subsequent build adds an Apple custom language model weighted toward the configured phrase, generated from text only. On the test Mac, first preparation completed in about one second and generated roughly 8.5 MB of cached data. The microphone then started normally; Pause released input and Enable resumed capture, reusing the prepared model. Preparation has cancellation guards and a 30-second timeout with bounded retries. These are local runtime observations; repeated physical-voice accuracy with the custom model is still under test.
 
-## Still required before a consumer binary release
+## Remaining validation beyond the community preview
 
 The tester subsequently reported that the first wake usually worked, with failures when retrying immediately after closing Voice. The earlier fixed startup cooldown could outlast a short call. The updated gate cancels that startup timer only after observing known Codex microphone activity, then resumes 1.5 seconds after observing its release. Retry/sleep delays remain independent and cannot be cancelled by a call transition. Automated tests cover this policy; user-perceived end-to-end re-arm latency still needs measurement.
 
@@ -35,6 +35,6 @@ After the handoff update, the tester confirmed that the app worked well, includi
 - Background playback tests against the actual microphone and desktop app. Unit tests verify the policy, not acoustic recognition quality or every helper-process lifecycle.
 - Long-session recovery, device unplug/reconnect, sleep/login behavior, and measured idle energy use.
 - Fresh-account permissions, macOS 15 testing, and runtime testing on Intel hardware.
-- Developer ID Application signing, notarization, stapling, Gatekeeper acceptance, and a clean-Mac downloaded-binary test.
+- A clean-Mac downloaded-binary and first-launch approval test. Developer ID signing, notarization, and stapling are a separate optional future distribution path, not used by the OSS community preview.
 
 Two physical voice successes were observed before the custom-model update. No reliable accuracy rate, wake latency, echo-cancellation capability, or completed notarization is claimed. See [RELEASING.md](RELEASING.md) for the full checklist.

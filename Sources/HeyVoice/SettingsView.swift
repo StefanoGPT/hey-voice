@@ -59,6 +59,10 @@ struct CompanionPopover: View {
                     Button("Microphone & Speech Permissions…") {
                         NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security")!)
                     }.buttonStyle(.link).font(.caption)
+                    Link("Setup guide", destination: URL(string: "https://github.com/StefanoGPT/hey-voice/blob/main/docs/INSTALL.md")!)
+                        .font(.caption)
+                    Link("Created by @StefanoGPT", destination: URL(string: "https://x.com/StefanoGPT")!)
+                        .font(.caption)
                 }.padding(.top, 9)
             }.font(.callout)
             if let error = controller.errorMessage {

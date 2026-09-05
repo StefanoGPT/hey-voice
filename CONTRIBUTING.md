@@ -8,4 +8,4 @@ Wake behavior changes should include regression tests for false triggers, stale 
 
 When reporting bugs, provide macOS and app versions, architecture, selected recognition language, microphone type, and concise reproduction steps. Do not attach transcripts, ambient recordings, credentials, or private Codex task contents. `--self-check` outputs capability booleans only.
 
-Public binary releases require the checks in `docs/RELEASING.md`. Keep signing keys, keychain profiles, notarization credentials, and local provisioning files out of commits.
+Community previews and optional notarized releases have separate checks in `docs/RELEASING.md`. Keep signing keys, keychain profiles, notarization credentials, and local provisioning files out of commits.

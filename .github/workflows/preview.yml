@@ -1,0 +1,30 @@
+name: Package community preview
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version number, for example 0.1.0
+        required: true
+        default: '0.1.0'
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: swift test
+      - name: Build community DMG and ZIP without Apple credentials
+        env:
+          VERSION: ${{ inputs.version }}
+        run: bash scripts/package-preview.sh
+      - name: Upload preview for release review
+        uses: actions/upload-artifact@v4
+        with:
+          name: hey-voice-macos-preview
+          path: |
+            dist/HeyVoice-*-macOS.dmg
+            dist/HeyVoice-*-macOS.zip
+            dist/HeyVoice-*-macOS.sha256
+          if-no-files-found: error
