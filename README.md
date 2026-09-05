@@ -8,7 +8,7 @@
 
 A tiny, independent macOS menu-bar companion that connects a customizable wake phrase to your desktop app’s voice hotkey. Change **Voice** to **Chat**, **Atlas**, or another word. The prefix stays **Hey**.
 
-**Created by [@StefanoGPT on X](https://x.com/StefanoGPT).** [Credits](CREDITS.md)
+**Created by [@StefanoGPT](https://x.com/StefanoGPT).** [Credits](CREDITS.md)
 
 **Status: macOS community preview, 0.1.0.** Available as a precompiled DMG or source code. Real spoken activation and re-arming have been confirmed on one Mac, with 18 automated policy tests. The precompiled app is ad-hoc signed and **not notarized by Apple**; first launch may require your approval in macOS Privacy & Security. See [validation](docs/VALIDATION.md) for coverage. Not affiliated with or endorsed by OpenAI.
 

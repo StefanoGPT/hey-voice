@@ -14,5 +14,5 @@
     <key>NSHighResolutionCapable</key><true/>
     <key>NSMicrophoneUsageDescription</key><string>Hey Voice uses your microphone to detect your custom wake phrase on this Mac. It does not save audio.</string>
     <key>NSSpeechRecognitionUsageDescription</key><string>Hey Voice uses on-device speech recognition to detect “Hey” followed by your chosen word. Audio and transcripts are not saved or sent by Hey Voice.</string>
-    <key>NSHumanReadableCopyright</key><string>Created by StefanoGPT (@StefanoGPT on X). Copyright © 2026 StefanoGPT and Hey Voice contributors. MIT License.</string>
+    <key>NSHumanReadableCopyright</key><string>Created by StefanoGPT (@StefanoGPT). Copyright © 2026 StefanoGPT and Hey Voice contributors. MIT License.</string>
 </dict></plist>

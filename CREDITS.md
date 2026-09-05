@@ -1,6 +1,6 @@
 # Credits
 
-**Hey Voice was created by StefanoGPT — [@StefanoGPT on X](https://x.com/StefanoGPT).**
+**Hey Voice was created by StefanoGPT — [@StefanoGPT](https://x.com/StefanoGPT).**
 
 Concept, product direction, and testing by StefanoGPT. Development and artwork were assisted by Codex. Thanks to everyone contributing fixes, translations, testing, and ideas.
 
