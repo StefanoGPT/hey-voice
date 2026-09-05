@@ -6,6 +6,10 @@
 
 **Say “Hey Voice.” Codex Voice opens. You take it from there.**
 
+**Latest version: v0.1.2 — [Download for macOS (.dmg)](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.2/HeyVoice-0.1.2-macOS.dmg)** · [What’s new](https://github.com/StefanoGPT/hey-voice/releases/tag/v0.1.2) · [All releases](https://github.com/StefanoGPT/hey-voice/releases)
+
+**Updating?** Quit Hey Voice, download the new DMG, and replace the app in Applications. You can always return to this repository page for the current download.
+
 A tiny, independent macOS menu-bar companion that connects a customizable wake phrase to your desktop app’s voice hotkey. Change **Voice** to **Chat**, **Atlas**, or another word. The prefix stays **Hey**.
 
 **Created by [@StefanoGPT](https://x.com/StefanoGPT).** [Credits](CREDITS.md)
