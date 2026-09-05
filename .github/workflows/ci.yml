@@ -1,0 +1,19 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test wake policy
+        run: swift test
+      - name: Build universal app
+        env:
+          UNIVERSAL: '1'
+        run: bash scripts/build-app.sh
+      - name: Validate bundle metadata
+        run: plutil -lint 'dist/Hey Voice.app/Contents/Info.plist'

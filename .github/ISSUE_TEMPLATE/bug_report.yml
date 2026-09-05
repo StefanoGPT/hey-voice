@@ -1,0 +1,29 @@
+name: Bug report
+description: Report a reproducible problem with Hey Voice.
+body:
+  - type: markdown
+    attributes:
+      value: "Please avoid audio recordings, transcripts, credentials, or screenshots containing private conversations. This preview currently supports macOS only."
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: macOS version, Apple silicon or Intel, and Hey Voice version or commit.
+    validations:
+      required: true
+  - type: input
+    id: microphone
+    attributes:
+      label: Microphone and recognition language
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include what you expected, what happened, and any message in the popover.
+    validations:
+      required: true
+  - type: textarea
+    id: timing
+    attributes:
+      label: Voice and audio state
+      description: Was a voice call open or recently closed? Were other apps playing audio? Does the Test shortcut button work?
