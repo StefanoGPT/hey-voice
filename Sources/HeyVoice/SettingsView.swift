@@ -20,13 +20,21 @@ struct CompanionPopover: View {
             VStack(alignment: .leading, spacing: 14) {
             HStack {
                 Text("Hey").font(.system(size: 21, weight: .medium, design: .rounded))
-                TextField("Voice", text: $controller.preferences.keyword)
+                TextField("Voice", text: $controller.keywordEdit.draft)
                     .textFieldStyle(.roundedBorder)
                     .accessibilityLabel("Word after Hey")
+                    .onSubmit { controller.saveKeyword() }
+                Button("Save") { controller.saveKeyword() }
+                    .disabled(!controller.keywordEdit.hasChanges || !controller.keywordEdit.isValid)
+                    .accessibilityLabel("Save wake word")
             }
-            Text("Say “Hey \(controller.preferences.keyword)”, then wait for Voice to open.")
+            Text(controller.keywordEdit.hasChanges
+                 ? "Unsaved changes. Saved phrase: “Hey \(controller.preferences.keyword)”."
+                 : controller.enabled
+                    ? "Saved: “Hey \(controller.preferences.keyword)”. Say it, then wait for Voice to open."
+                    : "Saved: “Hey \(controller.preferences.keyword)”. Enable Detection to start listening.")
                 .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
-            if !WakePhrase.validKeyword(controller.preferences.keyword) {
+            if !controller.keywordEdit.isValid {
                 Text("Choose one word with 2–24 letters.").font(.caption).foregroundStyle(.red)
             }
             HStack {
@@ -79,15 +87,20 @@ struct CompanionPopover: View {
             HStack {
                 Button(controller.enabled || controller.busy ? "Pause Detection" : "Enable Detection") { controller.toggle() }
                     .buttonStyle(.borderedProminent)
-                    .disabled(!WakePhrase.validKeyword(controller.preferences.keyword) && !controller.enabled && !controller.busy)
+                    .disabled(controller.keywordEdit.hasChanges && !controller.enabled && !controller.busy)
                 Spacer()
                 Button("Quit") { NSApplication.shared.terminate(nil) }.buttonStyle(.borderless).foregroundStyle(.secondary)
             }
-            Text("On-device. No audio saved.").font(.caption2).foregroundStyle(.tertiary)
+            HStack {
+                Text("On-device. No audio saved.")
+                Spacer()
+                Text("v\(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "dev")")
+                    .help("Build \(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "development")")
+                    .textSelection(.enabled)
+            }.font(.caption2).foregroundStyle(.secondary)
             }.padding(16)
         }
         .frame(width: 340, height: panelHeight)
-        .onChange(of: controller.preferences.keyword) { _, _ in controller.savePreferences() }
         .onChange(of: controller.preferences.locale) { _, _ in controller.savePreferences() }
         .onChange(of: controller.preferences.hotkey) { _, _ in controller.savePreferences() }
     }

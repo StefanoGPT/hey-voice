@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version number, for example 0.1.1
+        description: Version number, for example 0.1.2
         required: true
-        default: '0.1.1'
+        default: '0.1.2'
 permissions:
   contents: read
 jobs:

@@ -8,6 +8,7 @@ import HeyVoiceCore
 @MainActor
 final class CompanionController: ObservableObject {
     @Published var preferences = Preferences.load()
+    @Published var keywordEdit = WakeWordEdit(saved: "Voice")
     @Published private(set) var enabled = false
     @Published private(set) var busy = false
     @Published private(set) var errorMessage: String?
@@ -28,6 +29,9 @@ final class CompanionController: ObservableObject {
     private var now: TimeInterval { ProcessInfo.processInfo.systemUptime }
 
     init() {
+        keywordEdit = WakeWordEdit(saved: preferences.keyword)
+        lastKeyword = preferences.keyword
+        lastLocale = preferences.locale
         let center = NSWorkspace.shared.notificationCenter
         let pairs: [(Notification.Name, String, Bool)] = [
             (NSWorkspace.willSleepNotification, "sleep", true),
@@ -61,6 +65,12 @@ final class CompanionController: ObservableObject {
             speech.stop()
             lastKeyword = preferences.keyword; lastLocale = preferences.locale
         }
+    }
+
+    func saveKeyword() {
+        guard keywordEdit.hasChanges, keywordEdit.save() else { return }
+        preferences.keyword = keywordEdit.saved
+        savePreferences()
     }
 
     func toggle() {

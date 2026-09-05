@@ -6,7 +6,7 @@ Created by [@StefanoGPT](https://x.com/StefanoGPT).
 
 ## The simple installation path
 
-[Download the precompiled DMG](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.1/HeyVoice-0.1.1-macOS.dmg). No Terminal or developer tools are required. GitHub's automatic “Source code” ZIP is not an installer.
+[Download the precompiled DMG](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.2/HeyVoice-0.1.2-macOS.dmg). No Terminal or developer tools are required. GitHub's automatic “Source code” ZIP is not an installer.
 
 1. Download **HeyVoice-…-macOS.dmg** from Releases. One download covers both Apple silicon and Intel Macs; speech-model availability can vary by device.
 2. Open the DMG and drag **Hey Voice** onto **Applications**.
@@ -18,7 +18,7 @@ Created by [@StefanoGPT](https://x.com/StefanoGPT).
 
 1. Open Codex / ChatGPT and go to **Settings → Voice → Voice chat hotkey**. Set a shortcut if the field is empty.
 2. Click the Hey Voice orb, click its **Voice shortcut** field, and press the same combination. The two apps must use the same shortcut. The example ⌘6 is not a required default.
-3. Keep **Hey Voice** or change the word after “Hey”. Choose the recognition language under **Options** if needed.
+3. Keep **Hey Voice** or change the word after “Hey” and click **Save** (or press Return). The caption confirms the saved phrase. While editing, the last saved word stays in use; Save does not switch paused detection on. Choose the recognition language under **Options** if needed.
 4. Click **Enable Detection**. Allow **Microphone** and **Speech Recognition** when macOS asks.
 5. If asked for **Accessibility**, open **System Settings → Privacy & Security → Accessibility** and enable **Hey Voice**. Return to the orb and click Enable again.
 6. Say **“Hey Voice”**, wait for the Voice interface to open, then speak your request.
@@ -43,3 +43,7 @@ This option requires developer tools and is intended for people comfortable with
 ## Remove Hey Voice
 
 Turn off **Options → Launch at login**, click **Quit**, and move Hey Voice from Applications to the Trash. Remove its Privacy & Security entries if desired. Details about local preferences and cached models are in [Privacy](../PRIVACY.md).
+
+## Find your version
+
+Open the Hey Voice menu-bar panel. The installed version appears at the bottom right; hover over it to see the build number. Include this version when reporting an issue.

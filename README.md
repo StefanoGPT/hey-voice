@@ -10,7 +10,7 @@ A tiny, independent macOS menu-bar companion that connects a customizable wake p
 
 **Created by [@StefanoGPT](https://x.com/StefanoGPT).** [Credits](CREDITS.md)
 
-**Status: macOS community preview, 0.1.1.** Available as a precompiled DMG or source code. Real spoken activation and re-arming have been confirmed on one Mac, with 18 automated policy tests. The precompiled app is ad-hoc signed and **not notarized by Apple**; first launch may require your approval in macOS Privacy & Security. See [validation](docs/VALIDATION.md) for coverage. Not affiliated with or endorsed by OpenAI.
+**Status: macOS community preview, 0.1.2.** Available as a precompiled DMG or source code. Real spoken activation and re-arming have been confirmed on one Mac, with 22 automated policy tests. The precompiled app is ad-hoc signed and **not notarized by Apple**; first launch may require your approval in macOS Privacy & Security. See [validation](docs/VALIDATION.md) for coverage. Not affiliated with or endorsed by OpenAI.
 
 **Windows:** planned, not implemented. This Swift/AppKit app runs on macOS only. See the [Windows roadmap](docs/WINDOWS.md).
 
@@ -39,7 +39,7 @@ The build script supports Apple silicon and Intel. An Intel build is not evidenc
 
 ## Install the precompiled app
 
-**[Download Hey Voice for macOS (.dmg)](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.1/HeyVoice-0.1.1-macOS.dmg)** · [Release notes and checksums](https://github.com/StefanoGPT/hey-voice/releases/tag/v0.1.1)
+**[Download Hey Voice for macOS (.dmg)](https://github.com/StefanoGPT/hey-voice/releases/download/v0.1.2/HeyVoice-0.1.2-macOS.dmg)** · [Release notes and checksums](https://github.com/StefanoGPT/hey-voice/releases/tag/v0.1.2)
 
 1. Open the DMG and drag **Hey Voice** onto **Applications**.
 2. Eject the DMG, then open Hey Voice from Applications.
@@ -74,7 +74,7 @@ Open the `.app` bundle rather than using `swift run`: macOS needs the bundle’s
 2. Open Hey Voice. The default phrase is **Hey Voice** and the example hotkey is **⌘6**. ⌘6 is a starting value, not a documented Codex default.
 3. Click the **orb** icon in the menu bar. Hey Voice automatically locates Codex by its application identity, including installations named `ChatGPT.app`. It only targets Codex / ChatGPT.
 4. The popover shows the exact path: **Codex → Settings → Voice → Voice chat hotkey**. **Open Codex Settings** opens Settings; choose Voice there. Click the shortcut field and press the matching shortcut. A temporary macOS event tap isolates the combination from global hotkeys during recording. Include Command, Control, or Option. Escape cancels recording; capture also ends on focus loss or after 20 seconds. Accessibility permission is needed for isolated recording.
-5. Set the word after **Hey**, then click **Enable Detection** and grant the requested permissions. If macOS opens Accessibility settings, return and click Enable after granting access.
+5. If you change the word after **Hey**, click **Save** (or press Return). The saved phrase is shown below the field. Then click **Enable Detection** and grant the requested permissions. If macOS opens Accessibility settings, return and click Enable after granting access.
 6. Say **“Hey Voice”** (or your custom phrase). Wait for Codex’s Voice UI to connect, then give your request.
 
 The companion opens Voice; it does not capture or forward the instruction you say next. Continuous “Hey Voice, do this…” is not supported by the hotkey bridge. Voice readiness and ending the call belong to Codex. The companion does not assume the shortcut toggles or closes a call.
@@ -109,7 +109,7 @@ UNIVERSAL=1 ./scripts/build-app.sh
 
 Two packaging paths are available:
 
-- **Community preview (current):** `VERSION=0.1.1 scripts/package-preview.sh` builds a universal DMG, app ZIP, and SHA-256 checksums using ad-hoc signing. It never uses a personal certificate or Apple account. The manually triggered **Package community preview** GitHub workflow builds these files without Apple secrets. The first-launch notice must remain visible in release notes and the setup guide.
+- **Community preview (current):** `VERSION=0.1.2 scripts/package-preview.sh` builds a universal DMG, app ZIP, and SHA-256 checksums using ad-hoc signing. It never uses a personal certificate or Apple account. The manually triggered **Package community preview** GitHub workflow builds these files without Apple secrets. The first-launch notice must remain visible in release notes and the setup guide.
 - **Optional notarized distribution:** `scripts/package-release.sh` retains a separate Developer ID + notarization path for a future maintainer who chooses it. This is not required for the current OSS release and is not used by the community workflow. See [release documentation](docs/RELEASING.md).
 
 Neither script publishes automatically. Downloadable previews should be attached to a GitHub prerelease with their checksums and the exact source commit. Follow the [release checklist](docs/RELEASING.md); never describe an ad-hoc build as Apple-verified or notarized.

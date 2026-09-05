@@ -1,5 +1,6 @@
 import AppKit
 import CoreGraphics
+import HeyVoiceCore
 
 struct Hotkey: Codable, Equatable {
     var keyCode: UInt16 = 22
@@ -38,7 +39,8 @@ struct Preferences: Codable {
 
     static func load() -> Preferences {
         guard let data = UserDefaults.standard.data(forKey: "preferences"),
-              let value = try? JSONDecoder().decode(Preferences.self, from: data) else { return Preferences() }
+              var value = try? JSONDecoder().decode(Preferences.self, from: data) else { return Preferences() }
+        value.keyword = WakeWordEdit(saved: value.keyword).saved
         return value
     }
     func save() {
